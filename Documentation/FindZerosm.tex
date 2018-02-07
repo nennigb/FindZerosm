@@ -51,7 +51,9 @@
 
 \maketitle
 \begin{abstract}
-This package is suitable to compute the roots of an analytic function present inside a closed contour. There are numerous available numerical techniques for this purpose like Newton-Raphson method, Muller's method, the Secant method or the Nelder-Mead simplex method. All these techniques have in common that they all require initial approximations for the zeros to start the algorithm. The proposed implementation is based on the method called the Cauchy Integration Method  or the Argument Principle Method and allows to compute the number of zeros (including its multiplicity) of $f$ from contour integral.
+This package is suitable to compute the all the roots of an analytic function present inside a closed contour without initial guess. There are numerous root finding algorithm like Newton-Raphson method, Muller's method, the Secant method or the Nelder-Mead simplex method. All these techniques have in common that they require initial approximations for the zeros to start the algorithm.  The approach used here is to build a polynomial with the same zeros as the original function.
+
+The proposed implementation is based on the method called the Cauchy Integration Method or the Argument Principle Method and allows to compute the number of zeros (including its multiplicity) of a function from contour integral.
 
 This program was initially developed for poroelastic silencer applications\cite{Nennig:2010} in order to solved dispersion equation. The algorithm has been already used in other application fields (see \cite{Delves:1967,Chen:2000,Kravanja:2000} and the references therein) and we proposed here a basic numerical implementation in matlab language.
 
@@ -69,10 +71,9 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 % The method is often called the Cauchy Integration Method (CIM) or the Argument Principle Method (APM).
 % pole 
 The root-finding technique presented here is based on integration in the complex plan that does not require knowledge of initial guesses. 
-The other advantages of the method is to avoid to evaluate at the function close to its root where round-off error may be important because of large dynamic of function obtained from matrix determinant. The roots are deduced from the regularity of the function away from the roots.
+The other advantages of the method is to avoid to evaluate at the function close to its root where round-off error may be important for function with huge dynamic like those obtained from matrix determinant. The roots are deduced from the regularity of the function away from the roots.
 
-This is possible because of the Cauchy's Theorem, that allows to compute the number of zeros (including its multiplicity) of $f$  from the following
-integral relation
+This is possible, because of the Cauchy's Theorem, that allows to compute the number of zeros (including its multiplicity) of $f$  from the following integral relation
 \begin{equation}
     \label{eq:Arg_principle}
  S_0 = \frac{1}{2\pi \i} \oint_C \frac{f'(\beta)}{f(\beta)}  \ud \beta =
@@ -229,20 +230,20 @@ Now, if the roots are concentrated along the real or the imaginary axis, ellipti
 
 
 
-The numerical results accuracy can be check because \eqref{eq:Arg_principle} provides the number of zeros. If the number is not closed to an integer, the algorithm has encountered some trouble e. g. 
+The numerical results accuracy can be check because \eqref{eq:Arg_principle} provides the number of zeros. If the number is not closed to an integer, the algorithm has encountered some troubles e. g. 
 \begin{itemize}
-\item Presence of non analytic functions (tangent, some bessel function ratio, square root\dots)
-\item Too few points
+\item Presence of non analytic functions (tangent, some Bessel functions ratio similar to tangent function, square root\dots)
+\item Too few integration points
 \item A zeros is located on the contour
 \end{itemize}
 The algorithm change slightly the radius (see variable \texttt{RShift}) of the integration path and start again.
 
 %Important to use integer number of sample on the integration path
-The proposed implementation was relevant for our application. Other approaches can also be used for instance use logarithm instead of the ratio $f'/f$, use orthogonal polynom basis\dots
+The proposed implementation was relevant for our application. Other approaches can also be used for instance use complex logarithm instead of the ratio $f'/f$, use orthogonal polynom basis\dots
 
 
 \paragraph{remarks}
-If needed, pole can be easily remove by creating a hole in the integration contour. The multiplicity can be obtained but it is not implemented for now. When exponential growth becomes a problem, it is sometime possible to provide directly the ratio $f'/f$ instead of computing $f$ and $f'$ separately.
+If needed, poles can be easily remove by creating a hole in the integration contour by providing the \texttt{Ci}. The multiplicity can be obtained but it is not yet implemented. When exponential growth becomes a problem, it is sometime possible to provide directly the ratio $f'/f$ instead of computing $f$ and $f'$ separately.
 
 
 
@@ -326,11 +327,11 @@ Circular contour and elliptic contour are provided. %Ellipic contour are suitabl
 
 \subsection{Cantilever beam}
 % ------------------------------------------------------------------------------
-The first example concern a cantilever beam of length $L$. We are looking for the first discrete values of the wavenumber $\alpha_n$ roots of 
+The first example concerns a cantilever beam of length $L$. We are looking for the first discrete values of the wavenumber $\alpha_n$ roots of 
 \begin{equation}
 f(\alpha L) = \cos \alpha L \cosh \alpha L -1.
 \end{equation}
-The roots can be used for instance to compute the eigenfrequency of the beam. The usefull root are real and positive value of $\alpha_n L$.
+The roots can be used for instance to compute the eigenfrequency of the beam. The useful root are real and positive value of $\alpha_n L$.
 
 For a complete problem description, see \url{https://en.wikipedia.org/wiki/Euler-Bernoulli_beam_theory}. For an illustration of the package see \texttt{example/Cantilver.m}.
 
@@ -350,7 +351,7 @@ To the authors best knowledge, this always possible for closed waveguides.
 
 
 
-The proposed approach is validated with the results from Fig.~\ref{fig:sri} extracted from \cite{ when $h=1$, $k=1$, $c_0=1$ and $Z=3.5(1+\i)$ in \texttt{example/Liner2D.m} obtained with Newton-Raphson method.
+The proposed approach (see example file \texttt{example/Liner2D.m}) is validated with the results from Fig.~\ref{fig:sri} extracted from \cite{Poernomo:2008} when $h=1$, $k=1$, $c_0=1$ and $Z=3.5(1+\i)$  obtained with Newton-Raphson method.
 
 
 %
@@ -361,7 +362,7 @@ The proposed approach is validated with the results from Fig.~\ref{fig:sri} extr
 
 %Pour que la méthode marche la fonction $f$ doit être méromorphe. Passer par la fonction tangente ne le permet pas.
 
-\begin{figure}\label{fig:sri}
+\begin{figure}
 	\centering
 		\includegraphics[width=0.50\textwidth]{sri.pdf}
 	\caption{Example of numerical values\cite{Poernomo:2008} for transversal and axial wavenumber obtained for a lined 2D acoustic duct, $k=7$, $h=1$, and $Z=\pm 3.5(1+1i)$ obtained with Newton-Raphson method.}
