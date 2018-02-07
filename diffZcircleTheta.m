@@ -1,7 +1,23 @@
 function dfdz = diffZcircleTheta(f, Z, ordre,R0)
-% > Différence finie centrée sur un cercle dfdz = dfdtheta * 1/(iZ)
+% > Diffï¿½rence finie centrï¿½e sur un cercle dfdz = dfdtheta * 1/(iZ)
 % > utile pout FindZerosm.m
 
+% This file is part of FindZerom, A package to compute the zeros of 
+% analytic functions Copyright (C) 2018  Benoit Nennig, 
+% benoit.nennig@supmeca.fr
+% 
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 if nargin==3
     R=0;
@@ -12,10 +28,10 @@ Z =Z-R0;
 dfdz = zeros(size(f));
 h = abs(angle(Z(1)/Z(2)));
 
-% les point f(1) et f(ebd) contiennent la même info... il faut donc décaler
+% les point f(1) et f(ebd) contiennent la mï¿½me info... il faut donc dï¿½caler
 
 if ordre == 2
-    % schema d'ordre 2 centré
+    % schema d'ordre 2 centrï¿½
 
     dfdz(1) = f(2) - f(end-1);
     dfdz(end) = f(2) - f(end-1);
@@ -26,7 +42,7 @@ if ordre == 2
 
     
 elseif ordre == 5
-    %  schema centré d'ordre 5
+    %  schema centrï¿½ d'ordre 5
     dfdz(end) = -f(3) + 8*f(2) - 8*f(end-1) + f(end-2);
     dfdz(end-1) = -f(2) + 8*f(end) - 8*f(end-2) + f(end-3);
     dfdz(1) = -f(3) + 8*f(2) - 8*f(end-1) + f(end-2);
@@ -38,7 +54,7 @@ elseif ordre == 5
     
     
 elseif ordre == 9
-    %  schema centré d'ordre 9
+    %  schema centrï¿½ d'ordre 9
     a1 = 224/280;
     a2 = -56/280;
     a3 = 32/840;

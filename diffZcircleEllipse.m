@@ -1,10 +1,29 @@
 function dfdz = diffZcircleEllipse(f, Z, ordre,R0,Theta,R)
-% Différence finie centrée dfdz = dfdtheta * 1/(-a*sin(theta) +1i*b*cos(theta)
+% DiffÃ©rence finie centrÃ©e dfdz = dfdtheta * 1/(-a*sin(theta) +1i*b*cos(theta)
 
 
 %    pt a  delta/2   delta/2 pt b
 %     (i-1) ----- (i) ------ (i+1)
 %       -1         0           1     /(2h)
+
+
+% This file is part of FindZerom, A package to compute the zeros of 
+% analytic functions Copyright (C) 2018  Benoit Nennig, 
+% benoit.nennig@supmeca.fr
+% 
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 if nargin==3
     R=0;
@@ -16,10 +35,10 @@ dfdz = zeros(size(f));
 h = Theta(2)-Theta(1);
 
 Den = -R(1)*sin(Theta) + 1i*R(2)*cos(Theta);
-% les point f(1) et f(ebd) contiennent la même info... il faut donc décaler
+% les point f(1) et f(ebd) contiennent la mï¿½me info... il faut donc dï¿½caler
 
 if ordre == 2
-    % schema d'ordre 2 centré
+    % schema d'ordre 2 centrï¿½
 
     dfdz(1) = f(2) - f(end-1);
     dfdz(end) = f(2) - f(end-1);
@@ -30,7 +49,7 @@ if ordre == 2
    
 
 elseif ordre == 5
-    %     schema centré d'ordre 5
+    %     schema centrï¿½ d'ordre 5
     dfdz(end) = -f(3) + 8*f(2) - 8*f(end-1) + f(end-2);
     dfdz(end-1) = -f(2) + 8*f(end) - 8*f(end-2) + f(end-3);
     dfdz(1) = -f(3) + 8*f(2) - 8*f(end-1) + f(end-2);
