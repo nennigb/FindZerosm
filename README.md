@@ -17,7 +17,7 @@ in order to solved dispersion equation. The algorithm has been already used in o
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 ## Basic Usage
-The calling syntax is recalled here
-`K = FindZerosm(R,N,fhandle, *Refine, *R0)`
-Where * indicate optionnal parameters, `R` is integration radius,  `N` is the number of integration points and `fhandle` is the anonymous function of which the root are sought.
+This command compute the roots of fhandle inside a circle of radius `R` in the complex plane,
+`K = FindZerosm(R,N,fhandle)`
+Where `N` is the number of integration points (500 is a good start) and `fhandle` is the anonymous function of which the root are sought. 
 
