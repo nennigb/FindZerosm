@@ -33,7 +33,7 @@ function [K, Ci] = FindZerosm(R,N,fhandle,Refine,R0)
 % Mandatory input args :
 %  R : integration radius
 %  N : number of integration points
-%  fhandle : finds the zero of the anonymous function fhandle
+%  fhandle : is the anonymous function of which the root are sought
 % Optionnal input args :
 %  Refine = 1 ou 0 (local refinement with small circle around each root)
 %  R0 = 0 si l'origine est en O, coordonée de l'origine sinon
