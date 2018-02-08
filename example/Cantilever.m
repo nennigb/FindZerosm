@@ -5,13 +5,30 @@
 % ref value alpha_n.L = 1.875, 4.69, 7.85 and alpha_n.L ~ (2n-1)*pi/2 
 % ========================================================================%
 
+% This file is part of FindZerom, A package to compute the zeros of 
+% analytic functions Copyright (C) 2018  Benoit Nennig, 
+% benoit.nennig@supmeca.fr
+% 
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 close all
 clear all
 
 % FindZerom parameter
-Nrouche = 500;          % Nb point in the intergration path
-Rrouche = 15;             % Radius of the integration path
-Refine = 0;	          % Refine by making small circle close to each root
+Nrouche = 1500;          % Nb point in the intergration path
+Rrouche = 10;            % Radius of the integration path
+Refine = 0;	             % Refine by making small circle close to each root
 
 % definition of f, as an anonymous function
 cantileverBeam = @(alphaL)  cos(alphaL) * cosh(alphaL) +1;

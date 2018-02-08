@@ -48,8 +48,11 @@ function [S0, R, Ci ] = NumberZerosm(R,N,fhandle,Refine,R0)
 
 
 % ------------------------------------------------------------------------%
-% détermination du nombre de zéros et de péles
+% détermination du nombre de zéros et de pôles
 % ------------------------------------------------------------------------%
+
+% constant definition
+RShift = 1.02;   % percent of increase of the radius when bad convegency
 
 % check input args
 if nargin<3
@@ -60,7 +63,6 @@ elseif nargin<=3
 elseif nargin<=4
     R0 = 0;
 end
-
 
 tic
 fprintf('How many zeros inside... (R=%i)\n',R)
@@ -98,10 +100,7 @@ while ARRET~= 0
     % Int�gartion Nzero (- Npoles)
     S0 = ( 1/(2*1i*pi) )*trapz(Z,fp_f);
     fprintf('  > there is %i zeros \n', S0)
-%     if S0 >20
-%         fprintf('    -> Attention, plus de 20 z�ros, la m�thode peut �tre mal conditionn�e\n')
-%         fprintf('       utiliser plusieurs courrones...\n')
-%     end
+
 
     % crit�re d'arret de la boucle
     S0cut100 = round(10*S0)/10;
@@ -109,8 +108,8 @@ while ARRET~= 0
         ARRET = 0;
     else
         ARRET = ARRET+1;
-        R = R*.98;
-        fprintf('    -> Second tour R - 2 pct \n')
+        R = R*RShift;
+        fprintf('    -> Second tour R * %g \n', RShift)
         if ARRET > 10
             disp('Erreur : Pas assez de points.')
             return

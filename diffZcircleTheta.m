@@ -1,5 +1,5 @@
 function dfdz = diffZcircleTheta(f, Z, ordre,R0)
-% > Diff�rence finie centr�e sur un cercle dfdz = dfdtheta * 1/(iZ)
+% > Différence finie centrée sur un cercle dfdz = dfdtheta * 1/(iZ)
 % > utile pout FindZerosm.m
 
 % This file is part of FindZerom, A package to compute the zeros of 
