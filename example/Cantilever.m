@@ -62,7 +62,7 @@ ylabel('\Im \alpha L')
 % more suitable here because only real positive root are wanted
 % =========================================================================
 % call of FindZerom function
-Kd = FindZerosm(Rrouche,Nrouche,cantileverBeam,Refine,Rrouche/2);
+Kd = FindZerosm(Rrouche,Nrouche,cantileverBeam,Refine,Rrouche);
 
 % Keep only real and positive solution
 AlphanLd = sort(real(Kd(find(real(Kd) > 0 & abs(imag(Kd))< 1e-2))),'ascend');
