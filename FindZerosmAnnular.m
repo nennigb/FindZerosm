@@ -104,7 +104,7 @@ while ARRET~= 0
         ARRET = 0;
     else
         ARRET = ARRET+1;
-        R = R*Rshift;
+        R = R*RShift;
         fprintf('    -> Second tour R * %g \n', RShift)
         if ARRET > 10
             disp('Erreur : Pas assez de points!!')
@@ -116,7 +116,7 @@ while ARRET~= 0
 
 end
 % ------------------------------------------------------------------------%
-% d�termination ddes coefs et polynome
+% détermination ddes coefs et polynome
 % ------------------------------------------------------------------------%
 % s0 = S0
 S0 = round(S0);
@@ -128,7 +128,7 @@ S = zeros(1,S0); %p = zeros(1,S0+1);
 
 
 if R0==0
-    % On factorise R^n (quand R est grand ca am�liore...)
+    % On factorise R^n (quand R est grand ca améliore...)
     for ii=1:S0
         S(ii) = ( 1/(2*1i*pi) )*( (1i*R^(ii+1))*trapz(Theta, exp(1i*(ii+1)*Theta) .*fp_f) ...
             - (1i*Ci.Ri^(ii+1))*trapz(Thetai, exp(1i*(ii+1)*Thetai) .*Ci.fp_fi) );
@@ -145,12 +145,9 @@ C =  CoefC(S0,S);
 p = C(end:-1:1);
 % racines
 K = roots(p);
-% on trace les racines dans le plan complexe
+% display time
 fprintf('  > '); toc
 
-
-hold all
-% plot(Z)
 
 
 % ------------------------------------------------------------------------%
@@ -158,8 +155,8 @@ hold all
 % ------------------------------------------------------------------------%
 if Refine == 1
     for ii=1:S0
-        Nr = 5000;
-        Rr = abs(abs(K(ii)))*.05;
+        Nr = NRefine;
+        Rr = abs(abs(K(ii)))*RefineFraction;
         Kr= FindZerosm(Rr,Nr,fhandle,0,K(ii));
         % s'il n'a rien trouv�
         while (isempty(Kr)==1)
