@@ -153,12 +153,9 @@ C =  CoefC(S0,S);
 p = C(end:-1:1);
 % racines
 K = roots(p);
-% on trace les racines dans le plan complexe
+% display time
 fprintf('  > '); toc
 
-
-hold all
-% plot(Z)
 
 
 % ------------------------------------------------------------------------%

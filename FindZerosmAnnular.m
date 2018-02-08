@@ -65,7 +65,7 @@ end
 
 
 tic
-fprintf('Recherche de z�ros par CIM...\n')
+fprintf('Recherche de zéros par CIM...\n')
 ARRET = 1;
 
 while ARRET~= 0
@@ -91,9 +91,9 @@ while ARRET~= 0
     %    save integrande fp_f Z
     % Int�gartion Nzero (- Npoles)
     S0 = ( 1/(2*1i*pi) )*(trapz(Z,fp_f) -trapz(Ci.Zi,Ci.fp_fi));
-    fprintf('  > Le nombres de z�ros est %i\n', S0)
+    fprintf('  > Le nombres de zéros est %i\n', S0)
     if S0 >20
-        fprintf('    -> Attention, plus de 20 z�ros, la m�thode peut �tre mal conditionn�e\n')
+        fprintf('    -> Attention, plus de 20 zéros, la méthode peut être mal conditionnée\n')
         fprintf('       utiliser plusieurs courrones...\n')
     end
 
