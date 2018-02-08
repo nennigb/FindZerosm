@@ -8,7 +8,7 @@ This package is suitable to **compute all the roots of an analytic functions** p
 The proposed implementation is based on the method called the Cauchy Integration Method or the Argument Principle Method and allows to compute the number of zeros (including its multiplicity) of a function from contour integral. A [_short_ documentation](https://github.com/nennigb/FindZerosm/blob/master/Documentation/FindZerosm.pdf) explains quickly the theoretical background, shows the calling sequence and presents some example of applications and validations. 
 
 ## Origin
-This program was initially developed for poroelastic silencer applications [Nennig, 2010](https://github.com/nennigb/FindZerosm/blob/master/Documentation/Nennig_et_al_jasa_2010.pdf) 
+This program was initially developed for poroelastic silencer applications [[Nennig, 2010](https://github.com/nennigb/FindZerosm/blob/master/Documentation/Nennig_et_al_jasa_2010.pdf)]
 
 >B. Nennig, E. Perrey-Debain, and M. Ben Tahar. A mode matching method for modelling dissipative silencers lined with poroelastic materials and containing mean flow. J. Acoust. Soc. Am. , 12 (6) :3308-3320, 10.1121/1.3693655, 2010.
 
@@ -21,3 +21,5 @@ This command compute the roots of fhandle inside a circle of radius `R` in the c
 `K = FindZerosm(R,N,fhandle)`
 Where `N` is the number of integration points (500 is a good start) and `fhandle` is the anonymous function of which the root are sought. 
 
+## Installation
+Just download or clone the project. Eventually unzip the file and add the folder to matlab path
