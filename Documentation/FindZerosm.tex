@@ -293,6 +293,7 @@ The package is built on three main file
 \item \texttt{FindZerosm.m}, the main routine
 \item \texttt{diffZcircleTheta.m}, use compute high order finite differences
 \item \texttt{CoefC}, to recast the coeficients $S_n$ into the suitable polynomial form.
+\item \texttt{NumberZerosm.m}, to only count the zeros inside $C$.
 \end{itemize}
 this files are adapted to handle elliptic integral path :\texttt{diffZcircleEllipse.m}. The calling syntax is recalled here
 \begin{verbatim}
@@ -316,7 +317,7 @@ If more than 15-20 zeros are present in $C$, it is often better to use annular c
 [K3,Ci] = FindZerosmAnnularEllipse([R3 R4],N,@nom,Ci, *Refine, *R0); % "Annular" elliptic R2 and [R3 R4]
 K = [K1 ; K2 ; K3];
 \end{verbatim}
-Circular contour and elliptic contour are provided. %Ellipic contour are suitable if the roots are clustered to one axes.
+Circular contour and elliptic contour are alos provided. The contour can be plot using \texttt{Ci.Zi} variable.%Ellipic contour are suitable if the roots are clustered to one axes.
 %Enfin au lieu des couronnes il est aussi possible d'utiliser une version généralisée qui intrègre sur un contour élliptique. Elle est particulièrement utile si les zeros sont proche des axes. Attention toutefois à ne pas trop écraser l'ellipse, car l'intégration convergera moins vite (ou augmenter \texttt{N}).
 
 
@@ -371,7 +372,13 @@ The proposed approach (see example file \texttt{example/Liner2D.m}) is validated
 
 For this particular example,  $R=10$ and 500 points are put along the contour $C$ . All figures are the same and the computation time is around 0.02 seconds.
 
-
+\subsection{Adaptive ring splitting}
+% ------------------------------------------------------------------------------
+This example shows how using \texttt{NumberZerosm.m} a large number of zeros can be computed. This example is use to find the zeros of 
+\begin{equation}
+f(z) = (z-1)(z-2)(z-3)\cos z .
+\end{equation}
+The roots are explicitly known and the error can be checked. See example file \texttt{example/AdaptiveRing.m} for details.
 
 % BIBLIO ===============================================================================
 \bibliographystyle{plain}
