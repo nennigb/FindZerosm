@@ -79,9 +79,11 @@ while ARRET~= 0
     fp_f = zeros(1,N+1);
     ff = fp_f;
 
+% in case of fhadle can ve vectorised, changed here
     for ii = 1:(N+1)
         ff(ii) = fhandle(Z(ii));
     end
+% in case where analytic diff is available, change here
     fp_f = diffZcircleTheta(ff,Z,9,R0)./ff;
 
 

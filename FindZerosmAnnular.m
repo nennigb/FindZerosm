@@ -1,4 +1,4 @@
-function [K, Ci] = FindZerosmCourrone(R,N,fhandle,Ci,Refine,R0)
+function [K, Ci] = FindZerosmAnnular(R,N,fhandle,Ci,Refine,R0)
 % This file is part of FindZerom, A package to compute the zeros of 
 % analytic functions Copyright (C) 2018  Benoit Nennig, 
 % benoit.nennig@supmeca.fr
@@ -81,9 +81,11 @@ while ARRET~= 0
     fp_f = zeros(1,N+1);
     ff = fp_f;
 
+% in case of fhadle can ve vectorised, changed here
     for ii = 1:(N+1)
         ff(ii) = fhandle(Z(ii));
     end
+% in case where analytic diff is available, change here
     fp_f = diffZcircleTheta(ff,Z,9,R0)./ff;
 
 
@@ -120,23 +122,21 @@ end
 % ------------------------------------------------------------------------%
 % s0 = S0
 S0 = round(S0);
-% if imag(S0) ~= 0
-%     imag(S0)
-% end
-S = zeros(1,S0); %p = zeros(1,S0+1);
+S = zeros(1,S0); 
 % calcul des Sm
 
 
+% Intégration
 if R0==0
-    % On factorise R^n (quand R est grand ca améliore...)
     for ii=1:S0
+	% On factorise R^n (quand R est grand ca améliore...)
         S(ii) = ( 1/(2*1i*pi) )*( (1i*R^(ii+1))*trapz(Theta, exp(1i*(ii+1)*Theta) .*fp_f) ...
             - (1i*Ci.Ri^(ii+1))*trapz(Thetai, exp(1i*(ii+1)*Thetai) .*Ci.fp_fi) );
     end
 else
     % on ne factorise pas Rn (si R0 =/=0)
     for ii=1:S0
-        S(ii) = ( 1/(2*1i*pi) )*( trapz(Z,fp_f) - trapz(Ci.Zi, Ci.fp_fi) );
+        S(ii) = ( 1/(2*1i*pi) )*(trapz(Z,(Z.^ii).*fp_f) - trapz(Ci.Zi,(Ci.Zi.^ii).*Ci.fp_fi) );
     end
 end
 
@@ -158,7 +158,7 @@ if Refine == 1
         Nr = NRefine;
         Rr = abs(abs(K(ii)))*RefineFraction;
         Kr= FindZerosm(Rr,Nr,fhandle,0,K(ii));
-        % s'il n'a rien trouv�
+        % s'il n'a rien trouvé, increase Rr
         while (isempty(Kr)==1)
             Rr = 2*Rr; Nr = 2*Nr;
             Kr= FindZerosm(Rr,Nr,fhandle,0,K(ii));
