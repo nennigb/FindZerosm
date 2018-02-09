@@ -18,9 +18,11 @@ in order to solved dispersion equation. The algorithm has been already used in o
 This command compute the roots of fhandle inside a circle of radius `R` in the complex plane,
 `K = FindZerosm(R,N,fhandle)`
 Where `N` is the number of integration points (500 is a good start) and `fhandle` is the anonymous function of which the root are sought. For instance,
-> `f=@(x)cos(x)*cosh(x)-1;`
-> `K = FindZerosm(10,500,f)`
-> `plot(K,'.')`
+```
+f=@(x)cos(x)*cosh(x)+1;
+K = FindZerosm(10,500,f)
+plot(K,'.')
+```
 ## Installation
 Just download or clone the project. Eventually unzip the file and add the folder to matlab path.
 
