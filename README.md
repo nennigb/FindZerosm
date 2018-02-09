@@ -12,14 +12,17 @@ This program was initially developed for poroelastic silencer applications [[Nen
 
 >B. Nennig, E. Perrey-Debain, and M. Ben Tahar. A mode matching method for modelling dissipative silencers lined with poroelastic materials and containing mean flow. J. Acoust. Soc. Am. , 12 (6) :3308-3320, 10.1121/1.3693655, 2010.
 
-in order to solved dispersion equation. The algorithm has been already used in other applications fields (see [Delves, 1967;Chen, 2000; Kravanja, 2000] and the references therein) and we proposed  here a basic numerical implementation in matlab language. Examplew of applications in acoustics can be found in my [work](https://cv.archives-ouvertes.fr/benoit-nennig).
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+in order to solved dispersion equation. The algorithm has been already used in other applications fields (see [Delves, 1967;Chen, 2000; Kravanja, 2000] and the references therein). We proposed here a basic numerical implementation in matlab language. Examples of applications in acoustics can be found in my [work](https://cv.archives-ouvertes.fr/benoit-nennig).
 
 ## Basic Usage
 This command compute the roots of fhandle inside a circle of radius `R` in the complex plane,
 `K = FindZerosm(R,N,fhandle)`
-Where `N` is the number of integration points (500 is a good start) and `fhandle` is the anonymous function of which the root are sought. 
-
+Where `N` is the number of integration points (500 is a good start) and `fhandle` is the anonymous function of which the root are sought. For instance,
+> `f=@(x)cos(x)*cosh(x)-1;`
+> `K = FindZerosm(10,500,f)`
+> `plot(K,'.')`
 ## Installation
-Just download or clone the project. Eventually unzip the file and add the folder to matlab path
+Just download or clone the project. Eventually unzip the file and add the folder to matlab path.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
